@@ -1,0 +1,1 @@
+[ "compileSass", "postcss", "sortProperties", "lint", "minify", "sourceMap", "write" ]

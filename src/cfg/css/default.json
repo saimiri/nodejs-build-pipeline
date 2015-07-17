@@ -1,0 +1,33 @@
+{
+	"lint": false,
+	"minify": {
+		"debug": true,
+		"keepSpecialComments": false,
+		"mediaMerging": true,
+		"sourceMap": false
+	},
+	"sortProperties": true,
+	"cssComb": {
+		"color-case": "lower",
+		"color-shorthand": true,
+		"sort-order": [["background"]],
+		"sort-order-fallback": "abc",
+		"unitless-zero": true
+	},
+	"compileSass": {
+		"source": "src/scss/",
+		"file": "styles.scss",
+		"minimize": false
+	},
+	"postcss": {
+		"plugins": {
+			"autoprefixer-core": {
+				"browsers": "last 5 versions"
+			},
+			"postcss-color-rgba-fallback": true
+		}
+	},
+	"write": {
+		"targetFile": "dist/css/styles.css"
+	}
+}

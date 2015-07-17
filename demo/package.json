@@ -1,0 +1,8 @@
+{
+  "name": "My Nifty Build Script",
+  "version": "1.0.0",
+  "scripts": {
+		"watch:css": "watch \"node build.js\" src/scss",
+		"build": "node build.js"
+  }
+}

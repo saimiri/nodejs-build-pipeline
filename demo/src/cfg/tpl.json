@@ -1,0 +1,30 @@
+{
+	"global": {
+		"variables": {
+			"lang": "en",
+			"site_title": "The Node.js Build Pipeline",
+			"nav": [
+				{ "title": "Main", "link": "index.html" },
+				{ "title": "About", "link": "about.html" }
+			]
+		},
+		"partials": {
+			"header": "header.html",
+			"footer": "footer.html"
+		}
+	},
+	"scoped": {
+		"variables": {
+			"main": {
+				"title": "Demo Main Page",
+				"meta": "",
+				"nav_link": "index.html"
+			},
+			"about": {
+				"title": "What it's all about",
+				"meta": "",
+				"nav_link": "main.html"
+			}
+		}
+	}
+}
