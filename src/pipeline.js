@@ -1,6 +1,6 @@
 /**
  * The Pipeline class.
- * 
+ *
  * Copyright 2015 Juha Auvinen.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,9 +14,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * @package     No package
- * @subpackage  
+ * @subpackage
  * @copyright   Copyright (c) 2015 Juha Auvinen (http://www.saimiri.fi/)
  * @author      Juha Auvinen <juha@saimiri.fi>
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License 2.0
@@ -72,7 +72,7 @@ Pipeline.prototype.addTask = function( task ){
 }
 
 /**
- * 
+ *
  * TODO: Consider modifying this to add undefined tasks automatically to
  * taskList too.
  */
@@ -124,9 +124,9 @@ Pipeline.prototype.run = function( dataSet, options ) {
 				console.log( "...running pre_" + task );
 				dataSet = this.runWorkers( this.workers["pre_" + task], this.config[task], dataSet );
 			}
-			
+
 			dataSet = this.runWorkers( this.workers[task], this.config[task], dataSet );
-			
+
 			if ( this.workers["post_" + task] ) {
 				console.log( "...running post_" + task );
 				dataSet = this.runWorkers( this.workers["post_" + task], this.config[task], dataSet );
@@ -153,11 +153,11 @@ Pipeline.prototype.readJson = function( jsonFile ) {
 /**
  *  Merges two objects recursively together, object2 overwriting the
  *  properties of object1. Should not change original objects.
- *  
+ *
  */
 Pipeline.prototype.merge = function( object1, object2 ) {
 	var temp = {};
-	
+
 	for ( var prop in object1 ) {
 		if ( typeof object1[prop] === "object" ) {
 			temp[prop] = this.merge( temp[prop], object1[prop] );
@@ -178,14 +178,14 @@ Pipeline.prototype.merge = function( object1, object2 ) {
 }
 
 /**
- * 
+ *
  */
 Pipeline.prototype.log = function( message, msgType ){
 	console.log( message );
 }
 
 /**
- * 
+ *
  */
 Pipeline.prototype.logList = function( messages, msgType ) {
 	console.log( msgType, "count: ", messages.length );
@@ -200,7 +200,7 @@ Pipeline.prototype.glob = function( dataSet, options ){
 	dataSet = [];
 	var glob = require( "glob" );
 	var output = [];
-	
+
 	if ( options.sourceDir ) {
 		if ( Array.isArray( options.sourceDir ) ) {
 			for ( var i = 0, j = options.sourceDir.length; i < j; i++ ) {
@@ -226,16 +226,16 @@ Pipeline.prototype.readFile = function( file ){
 }
 
 /**
- * 
+ *
  */
 Pipeline.prototype.write = function ( dataSet, options ) {
-	
+
 	dataSet.forEach( function( item ){
 		// These need some real world testing to see how they should really be
-		// resolved. 
+		// resolved.
 		var targetFile = item.targetFile || options.targetFile || item.filename;
 		var targetDir = item.targetDir || options.targetDir;
-		
+
 		// File name needs to be generated from the original
 		if ( targetFile.indexOf( "*" ) !== -1 ) {
 			var ext = targetFile.split( "*" ).pop();
@@ -255,23 +255,25 @@ Pipeline.prototype.write = function ( dataSet, options ) {
 		} else {
 			targetPath = targetDir + "/" + targetFile;
 		}
-		
+
 		var dirToCreate = this.getDirectory( targetPath );
-		
+
 		console.log( "......creating dir", dirToCreate, "(or not)" );
 		wrench.mkdirSyncRecursive( dirToCreate );
 		console.log( "......writing file to", targetPath );
 		this.writeToFile( targetPath, item.data );
 	}, this );
+
+	return dataSet;
 }
 
 Pipeline.prototype.writeToFile = function( file, content ){
-	fs.writeFileSync( file, content );	
+	fs.writeFileSync( file, content );
 }
 
 
 /**
- * 
+ *
  */
 Pipeline.prototype.getDirectory = function( filePath ){
 	if ( filePath.indexOf( "/" ) === -1 ) {
@@ -282,7 +284,7 @@ Pipeline.prototype.getDirectory = function( filePath ){
 }
 
 /**
- * 
+ *
  */
 Pipeline.prototype.getFilename = function( filePath, removeExtension ){
 	var filename = filePath.split( /[\\/]/ ).pop();
@@ -293,7 +295,7 @@ Pipeline.prototype.getFilename = function( filePath, removeExtension ){
 }
 
 /**
- * 
+ *
  */
 Pipeline.prototype.switchExtension = function( filename, toExtension ){
 	return filename.replace( /\.[^/.]+$/, toExtension );
