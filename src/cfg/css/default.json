@@ -21,7 +21,7 @@
 	},
 	"postcss": {
 		"plugins": {
-			"autoprefixer-core": {
+			"autoprefixer": {
 				"browsers": "last 5 versions"
 			},
 			"postcss-color-rgba-fallback": true
